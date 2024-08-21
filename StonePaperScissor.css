@@ -1,0 +1,17 @@
+body{
+  text-align: center;
+}
+
+.my-button{
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin: 10px;
+}
+.choice-image{
+  width: 100px;
+  height: 100px;
+  
+}

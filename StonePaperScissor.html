@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stone Paper Scissor</title>
+  <link rel="stylesheet" href="StonePaperScissor.css">
+
+</head>
+<body>
+
+  <h1 id="heading">Stone Paper Scissor</h1>
+
+  <button class="my-button" onclick="
+   
+    
+ let computerMove=generateChoice()
+ let result=getResult('stone',computerMove)
+ console.log(result)
+ showResult('stone',computerMove,result)
+
+
+    "><img class="choice-image" src="images/stone.png.crdownload" alt="stone image"></button>
+
+
+  <button class="my-button" onclick="
+  
+   computerMove=generateChoice()
+   result=getResult('paper',computerMove)
+ console.log(result)
+ showResult('paper',computerMove,result)
+
+  "><img class="choice-image" src="images/paper.png.crdownload" alt="paper image"></button>
+
+  <button  class="my-button" onclick="
+  
+  
+   computerMove=generateChoice()
+  result=getResult('scissor',computerMove)
+ console.log(result)
+ showResult('scissor',computerMove,result)
+  
+  "><img  class="choice-image" src="images/scissor.png" alt="scissor image"></button>
+
+  <h3 id="user-move"></h3>
+  <h3 id="computer-move"></h3>
+  <h3 id="result"></h3>
+  <h3 id="score"></h3>
+
+  <script>
+
+   let scoreString=localStorage.getItem('score')
+
+   let score=JSON.parse(scoreString)||{
+        win:0,
+        loss:0,
+        tie:0
+    }
+
+    
+    function generateChoice(){
+
+     let computerChoice=Math.random()*3;
+
+    if(computerChoice>0 && computerChoice<=1){
+      return 'stone'
+    }else if(computerChoice>1 && computerChoice<=2){
+      return 'paper'
+    }else{
+      return 'scissor'
+    }
+  }
+
+  function getResult(userMove,computerMove){
+    if(userMove==='stone'){
+      if(userMove===computerMove){
+        score.tie++;
+        return 'its tie'
+      }else if(computerMove==='paper'){
+        score.loss++;
+        return 'computer has Won'
+      }else{
+        score.win++;
+        return 'User has won'
+      }
+    }else if(userMove==='paper'){
+      if(userMove===computerMove){
+        score.tie++;
+        return ' its tie'
+      }else if(computerMove === 'stone'){
+        score.win++;
+        return 'User Has Won'
+      }else{
+        score.loss++;
+        return 'computer Has won'
+      }
+    }else{
+      if(userMove===computerMove){
+        score.tie++;
+        return 'its tie'
+      }else if(computerMove==='stone'){
+        score.loss++;
+        return 'Computer Has won'
+      }else{
+        score.win++;
+        return ' User Has won'
+      }
+    
+    }
+  }
+
+  function showResult(userMove,computerMove,result){
+
+    localStorage.setItem('score',JSON.stringify(score))
+
+    document.querySelector('#user-move').innerText=`User Move is ${userMove}`
+ 
+    document.querySelector('#computer-move').innerText=`computer move is ${computerMove}`
+
+    document.querySelector('#result').innerText=` ${result}`
+
+    document.querySelector('#score').innerText=`Score: No of Matches won ${score.win}, No of matches Lost ${score.loss}, no of matches tied ${score.tie}`
+
+    
+
+  }
+  </script>
+  
+</body>
+</html>
